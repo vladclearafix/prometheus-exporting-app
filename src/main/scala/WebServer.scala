@@ -4,6 +4,7 @@ import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.Directives._
 import akka.stream.ActorMaterializer
 import kamon.Kamon
+import kamon.system.SystemMetrics
 
 import scala.io.StdIn
 
@@ -14,6 +15,7 @@ object WebServer {
 
     val reporter = new PrometheusReporter()
     Kamon.addReporter(reporter)
+    SystemMetrics.startCollecting()
 
     implicit val system = ActorSystem("my-system")
     implicit val materializer = ActorMaterializer()
@@ -21,6 +23,7 @@ object WebServer {
     implicit val executionContext = system.dispatcher
 
     val myCounter = Kamon.counter("vlad.counter")
+
     val route =
       path("hello") {
         get {

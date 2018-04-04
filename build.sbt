@@ -10,3 +10,4 @@ libraryDependencies := Seq(
 )
 
 libraryDependencies += "io.kamon" %% "kamon-prometheus" % "1.0.0"
+libraryDependencies += "io.kamon" %% "kamon-system-metrics" % "1.0.0"
